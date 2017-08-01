@@ -8,6 +8,10 @@
   },
   "author": "Nicolantonio Vignola",
   "license": "ISC",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/nvignola/ascesis-cli"
+  },
   "bin": {
     "createComponent": "./index.js"
   },

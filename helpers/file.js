@@ -1,12 +1,8 @@
 const fs = require("fs");
 const path = require("path");
-const touch = require("touch");
 const logger = require("./logger");
 
-// From config
-const prefix = require("../template.config").prefix;
-const filesExt = require("../template.config").extensions;
-const fileCnt = require("../template.config").files;
+let prefix = '';
 
 function fileManager() {
   let getCurrentDirectoryBase = () => {
@@ -21,20 +17,29 @@ function fileManager() {
     }
   };
 
-  let createDirectory = dirName => {
-    if (!directoryExists(prefix + dirName)) {
-      fs.mkdirSync(prefix + dirName);
+  let createDirectory = (dirName, location, customPrefix) => {
+    if (customPrefix) {
+      prefix = customPrefix;
+    }
+    if (!directoryExists(path.join(location, prefix + dirName))) {
+      fs.mkdirSync(path.join(location, prefix + dirName));
     }
     return true;
   };
 
-  let createFiles = fileName => {
+  let createFiles = (fileName, location) => {
+    
+    // From config
+    const filesExt = require("../template.config").extensions;
+    const fileCnt = require("../template.config").files;
+
+    logger.activity(`On Loacation: ${location}`);
     logger.activity(`/${prefix + fileName}`);
 
     filesExt.forEach(ext => {
       const componentName = prefix + fileName;
-      const pathToFile = `${componentName}/${componentName}.${ext}`;
-      const cnt = fileCnt[ext](fileName);
+      const pathToFile = path.join(location, componentName, `${componentName}.${ext}`);
+      const cnt = fileCnt[ext](fileName, prefix);
 
       if (!fs.existsSync(pathToFile)) {
         fs.writeFile(pathToFile, cnt, function(err) {
@@ -48,9 +53,9 @@ function fileManager() {
     });
   };
 
-  let createFilesInDir = dirName => {
-    if (createDirectory(dirName)) {
-      createFiles(dirName);
+  let createFilesInDir = (dirName, location, customPrefix) => {
+    if (createDirectory(dirName, location, customPrefix)) {
+      createFiles(dirName, location);
     }
   };
 

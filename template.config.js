@@ -1,38 +1,38 @@
 const files = {
-  "hyper.html": componentName => ``,
+  "hyper.html": (componentName, prefix) => ``,
 
-  "scss": componentName => `${componentName} {}`,
+  "scss": (componentName, prefix) => `${prefix}${componentName} {}`,
 
-  "js": componentName =>
-`const BaseComponent = require('components/ibe-base');
+  "js": (componentName, prefix) =>
+`const BaseComponent = require('components/${prefix}base');
 const hyperHTML = require('hyperhtml');
 
-const template = require('./ibe-${componentName}.hyper.html');
-const styles = require('./${componentName}.scss');
+const template = require('./${prefix}${componentName}.hyper.html');
+const styles = require('./${prefix}${componentName}.scss');
 
 class ${ucFirst(componentName)} extends BaseComponent {
   connectedCallback() {
     super.connectedCallback();
   }
 }
-customElements.define('ibe-${componentName}', ${ucFirst(componentName)});
+customElements.define('${prefix}${componentName}', ${ucFirst(componentName)});
 `,
 
-  "test.js": componentName =>
+  "test.js": (componentName, prefix) =>
 `require('document-register-element');
 const { createDelegate } = require('ascesis/delegate');
 const { fireEvent } = require('ascesis');
-require('./ibe-${componentName}');
+require('./${prefix}${componentName}');
 
 //mock console.error
 console.error = jest.fn();
 `,
 
-  "story.js": componentName =>
+  "story.js": (componentName, prefix) =>
 `const { withReadme } = require('ascesis-storybook/addons/readme');
 const { withEvents } = require('ascesis-storybook/addons/events');
 
-require('./ibe-${componentName}');
+require('./${prefix}${componentName}');
 `
 };
 
@@ -43,8 +43,7 @@ function ucFirst(string) {
 function templatesConfig() {
 
   return {
-    "prefix": "ibe-",
-    "extensions": Object.keys(files),
+    extensions: Object.keys(files),
     files
   }
 }

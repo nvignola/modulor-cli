@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "chalk": "^2.0.1",
+    "change-case": "^3.0.1",
     "commander": "^2.11.0"
   }
 }

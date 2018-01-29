@@ -1,5 +1,5 @@
-# ascesis-cli
-Command line tool for create necessary file for new components
+# modulor-cli
+Command line tool for create necessary file for new components.
 
 
 # Usage
@@ -16,11 +16,11 @@ Command line tool for create necessary file for new components
 # Output
 
 ```
-➜  ascesis-cli git:(master) ✗ createComponent -n demo -p "d-" -d "./test"
-On Loacation: /Library/WebServer/Documents/ascesis-cli/test
+➜  modulor-cli git:(master) ✗ createComponent -n demo -p "d-" -d "./test"
+On Loacation: /Library/WebServer/Documents/modulor-cli/test
 /d-demo
- |- d-demo.hyper.html
- |- d-demo.scss
+ |- d-demo.es6.html
+ |- d-demo.css
  |- d-demo.js
  |- d-demo.test.js
  |- d-demo.story.js

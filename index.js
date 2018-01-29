@@ -3,6 +3,7 @@
 const path = require('path');
 const program = require("commander");
 const file = require("./helpers/file");
+const Case = require('change-case');
 
 let location = process.cwd();
 let prefix = null;
@@ -24,4 +25,4 @@ if (program.prefix) {
 
 const name = program.name;
 
-file.createFilesInDir(name, location, prefix);
+file.createFilesInDir(Case.paramCase(name), location, prefix);

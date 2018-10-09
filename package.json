@@ -1,6 +1,6 @@
 {
-  "name": "ascesis-cli",
-  "version": "0.0.1",
+  "name": "modulor-cli",
+  "version": "0.0.2",
   "description": "Command line tool for create necessary files for new components",
   "main": "index.js",
   "scripts": {

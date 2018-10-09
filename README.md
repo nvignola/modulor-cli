@@ -19,7 +19,7 @@ Command line tool for create necessary file for new components.
 ➜  modulor-cli git:(master) ✗ createComponent -n demo -p "d-" -d "./test"
 On Loacation: /Library/WebServer/Documents/modulor-cli/test
 /d-demo
- |- d-demo.es6.html
+ |- d-demo.modulor.html
  |- d-demo.css
  |- d-demo.js
  |- d-demo.test.js

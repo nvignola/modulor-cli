@@ -1,7 +1,7 @@
 const Case = require('change-case');
 
 const files = {
-  "es6.html": (componentName, prefix) => 
+  "modulor.html": (componentName, prefix) => 
 `<div>
   
 </div>`,
@@ -12,12 +12,12 @@ const files = {
 }`,
 
   "js": (componentName, prefix) =>
-`const { BaseComponent } = require('modulor');
-// const BaseComponent = require('components/${prefix}base');
+`import { BaseComponent } from 'modulor'
+// import BaseComponent from 'components/${prefix}base';
 
-require('./${prefix}${componentName}.css');
+import './${prefix}${componentName}.css';
 
-const template = require('./${prefix}${componentName}.es6.html');
+import template from './${prefix}${componentName}.modulor.html';
 
 class ${Case.pascalCase(componentName)} extends BaseComponent {
   connectedCallback() {
@@ -25,7 +25,7 @@ class ${Case.pascalCase(componentName)} extends BaseComponent {
     this.render();
   }
   render() {
-    this.refs = this.html(template({}));
+    template({}, this);
     this.bindEvents();
   }
   bindEvents() {
@@ -36,8 +36,7 @@ customElements.define('${prefix}${componentName}', ${Case.pascalCase(componentNa
 `,
 
   "test.js": (componentName, prefix) =>
-`
-/* eslint-disable */
+`/* eslint-disable */
 require('./${prefix}${componentName}');
 
 describe('${Case.titleCase(componentName)}', () => {
@@ -70,11 +69,10 @@ describe('${Case.titleCase(componentName)}', () => {
 `,
 
   "story.js": (componentName, prefix) =>
-`
-/* eslint-disable */
+`/* eslint-disable */
 import { storiesOf } from 'modulor-storybook';
-const { withReadme } = require('ascesis-storybook/addons/readme');
-const { withEvents } = require('ascesis-storybook/addons/events');
+const { withReadme } = require('modulor-storybook/addons/readme');
+const { withEvents } = require('modulor-storybook/addons/events');
 
 require('./${prefix}${componentName}');
 

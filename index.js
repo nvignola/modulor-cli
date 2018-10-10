@@ -4,12 +4,13 @@ const path = require('path');
 const program = require("commander");
 const file = require("./helpers/file");
 const Case = require('change-case');
+const pkg = require('./package');
 
 let location = process.cwd();
 let prefix = null;
 
 program
-  .version("1.0.0")
+  .version(pkg.version)
   .option("-n, --name [name]", "component name")
   .option("-d, --dir [dir]", "target directory relative or absolute path")
   .option("-p, --prefix [prefix]", "prefix for the component name and its files")
